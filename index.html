@@ -1,18 +1,416 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>汕尾旅游攻略</title>
-<style>
-body{font-family:Microsoft YaHei; max-width:800px; margin:0 auto; padding:20px; background:#f7f9fa}
-h1{color:#0077e6; text-align:center}
-.item{background:white; padding:15px; border-radius:8px; margin:10px 0; box-shadow:0 2px 5px #0000000a}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汕尾旅游</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet地图库 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Swiper轮播图库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
 <body>
-<h1>汕尾旅游攻略</h1>
-<div class="item"><h2>📍必去景点</h2><p>红海湾、风车岛、金町湾、玄武山</p></div>
-<div class="item"><h2>🍤必吃美食</h2><p>菜粿、小米、咸茶、牛肉饼</p></div>
-<div class="item"><h2>🚗交通</h2><p>高铁到汕尾站，打车/共享电动车</p></div>
+    <!-- 天气控制面板 -->
+    <div class="weather-control-panel">
+        <div class="weather-display">
+            <div class="weather-icon">
+                <i class="fas fa-sun" id="currentWeatherIcon"></i>
+            </div>
+            <div class="weather-info">
+                <div class="temp" id="currentTemp">24°C</div>
+                <div class="location" id="currentLocation">汕尾市</div>
+            </div>
+        </div>
+        <div class="weather-toggle-buttons">
+            <button class="weather-btn active" data-weather="sunny">
+                <i class="fas fa-sun"></i> 晴天
+            </button>
+            <button class="weather-btn" data-weather="rainy">
+                <i class="fas fa-cloud-rain"></i> 雨天
+            </button>
+            <button class="weather-btn" data-weather="auto">
+                <i class="fas fa-sync-alt"></i> 自动
+            </button>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-umbrella-beach"></i>
+                <span>汕尾旅游</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="#map-section"><i class="fas fa-map-marked-alt"></i> 路线地图</a></li>
+                <li><a href="#attractions"><i class="fas fa-landmark"></i> 景点推荐</a></li>
+                <li><a href="#itinerary"><i class="fas fa-route"></i> 行程规划</a></li>
+                <li><a href="#food"><i class="fas fa-utensils"></i> 美食推荐</a></li>
+                <li><a href="#transport"><i class="fas fa-car"></i> 交通指南</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="nav-action-btn" id="printBtn" title="打印攻略">
+                    <i class="fas fa-print"></i>
+                </button>
+                <button class="nav-action-btn" id="shareBtn" title="分享">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="nav-action-btn" id="themeToggle" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 首页欢迎区 -->
+        <section id="home" class="section hero-section">
+            <div class="hero-overlay">
+                <h1 class="hero-title">汕尾旅游指南</h1>
+                <p class="hero-subtitle">探索粤东最美的海港城市</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>12+ 个必去景点</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-utensils"></i>
+                        <span>20+ 种特色美食</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-hotel"></i>
+                        <span>8+ 家推荐住宿</span>
+                    </div>
+                </div>
+                <button class="cta-button" onclick="scrollToSection('map-section')">
+                    开始探索 <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 路线地图区 -->
+        <section id="map-section" class="section map-section">
+            <div class="section-header">
+                <h2><i class="fas fa-map-marked-alt"></i> 交互式路线地图</h2>
+                <p class="section-subtitle">点击地图标记查看景点详情，实时规划您的行程</p>
+            </div>
+            <div class="map-container">
+                <div class="map-controls">
+                    <div class="route-selector">
+                        <button class="route-btn active" data-route="day1">Day 1 路线</button>
+                        <button class="route-btn" data-route="day2">Day 2 路线</button>
+                        <button class="route-btn" data-route="all">全部路线</button>
+                    </div>
+                    <div class="map-actions">
+                        <button class="map-action-btn" id="locateMe">
+                            <i class="fas fa-location-crosshairs"></i> 我的位置
+                        </button>
+                        <button class="map-action-btn" id="resetView">
+                            <i class="fas fa-expand"></i> 重置视图
+                        </button>
+                    </div>
+                </div>
+                <div id="interactiveMap"></div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-color day1-color"></span>
+                        <span>Day 1 景点</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color day2-color"></span>
+                        <span>Day 2 景点</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color current-color"></span>
+                        <span>您的位置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 景点推荐区 -->
+        <section id="attractions" class="section attractions-section">
+            <div class="section-header">
+                <h2><i class="fas fa-landmark"></i> 精选景点推荐</h2>
+                <p class="section-subtitle">晴雨有别，选择最适合您天气的游玩景点</p>
+            </div>
+            
+            <div class="weather-filter">
+                <button class="filter-btn active" data-filter="all">全部景点</button>
+                <button class="filter-btn" data-filter="sunny">晴天推荐</button>
+                <button class="filter-btn" data-filter="rainy">雨天推荐</button>
+                <button class="filter-btn" data-filter="indoor">室内景点</button>
+            </div>
+
+            <div class="attractions-container">
+                <!-- 景点卡片将通过JavaScript动态生成 -->
+            </div>
+        </section>
+
+        <!-- 行程规划区 -->
+        <section id="itinerary" class="section itinerary-section">
+            <div class="section-header">
+                <h2><i class="fas fa-route"></i> 智能行程规划</h2>
+                <p class="section-subtitle">根据天气和您的偏好，为您定制最佳行程</p>
+            </div>
+            
+            <div class="itinerary-container">
+                <div class="day-planner">
+                    <div class="day-tabs">
+                        <button class="day-tab active" data-day="1">Day 1</button>
+                        <button class="day-tab" data-day="2">Day 2</button>
+                        <button class="day-tab" data-day="custom">自定义</button>
+                    </div>
+                    
+                    <div class="day-content active" id="day1-content">
+                        <div class="timeline">
+                            <!-- 时间线项目将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="day-content" id="day2-content">
+                        <div class="timeline">
+                            <!-- 时间线项目将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="day-content" id="custom-content">
+                        <div class="custom-planner">
+                            <h3>自定义您的行程</h3>
+                            <div class="attraction-selector">
+                                <!-- 景点选择器将通过JavaScript动态生成 -->
+                            </div>
+                            <button class="generate-btn" id="generateItinerary">
+                                <i class="fas fa-magic"></i> 生成智能行程
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="itinerary-summary">
+                    <h3><i class="fas fa-chart-line"></i> 行程概览</h3>
+                    <div class="summary-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-walking"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalAttractions">5</span>
+                                <span class="stat-label">个景点</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalTime">8</span>
+                                <span class="stat-label">小时</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-road"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalDistance">45</span>
+                                <span class="stat-label">公里</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-advice">
+                        <h4><i class="fas fa-cloud-sun"></i> 天气建议</h4>
+                        <p id="weatherAdvice">今日天气晴朗，建议做好防晒措施，享受户外活动。</p>
+                    </div>
+                    <div class="download-options">
+                        <button class="download-btn" id="downloadPDF">
+                            <i class="fas fa-file-pdf"></i> 下载PDF
+                        </button>
+                        <button class="download-btn" id="shareItinerary">
+                            <i class="fas fa-share"></i> 分享行程
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 美食推荐区 -->
+        <section id="food" class="section food-section">
+            <div class="section-header">
+                <h2><i class="fas fa-utensils"></i> 地道美食推荐</h2>
+                <p class="section-subtitle">品尝汕尾最正宗的味道</p>
+            </div>
+            
+            <div class="food-categories">
+                <button class="category-btn active" data-category="all">全部美食</button>
+                <button class="category-btn" data-category="street">街边小吃</button>
+                <button class="category-btn" data-category="seafood">海鲜大餐</button>
+                <button class="category-btn" data-category="dessert">甜品饮品</button>
+                <button class="category-btn active" data-category="hotpot">火锅</button>
+                <button class="category-btn" data-category="bbq">正餐</button>
+                <button class="category-btn" data-category="noodles">汤粉粥类</button>
+                <button class="category-btn" data-category="dimsum">早茶</button>
+                <button class="category-btn" data-category="restaurant">正餐</button>
+            </div>
+            
+            <div class="food-container">
+                <!-- 美食卡片将通过JavaScript动态生成 -->
+            </div>
+        </section>
+
+        <!-- 交通指南区 -->
+        <section id="transport" class="section transport-section">
+            <div class="section-header">
+                <h2><i class="fas fa-car"></i> 交通出行指南</h2>
+                <p class="section-subtitle">从广州新塘出发的完整交通方案</p>
+            </div>
+            
+            <div class="transport-options">
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>高铁出行</h3>
+                    <div class="transport-detail">
+                        <p><strong>出发：</strong>广州新塘站 21:36</p>
+                        <p><strong>到达：</strong>汕尾站P2停车场 22:34</p>
+                        <p><strong>时长：</strong>58分钟</p>
+                    </div>
+                    <button class="book-btn" data-type="train">查看车次</button>
+                </div>
+                
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-taxi"></i>
+                    </div>
+                    <h3>市内交通</h3>
+                    <div class="transport-detail">
+                        <p><strong>打车：</strong>约50-60元</p>
+                        <p><strong>车程：</strong>约30分钟</p>
+                        <p><strong>目的地：</strong>鲸玥民宿</p>
+                    </div>
+                    <button class="book-btn" data-type="taxi">预约车辆</button>
+                </div>
+                
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>海岛交通</h3>
+                    <div class="transport-detail">
+                        <p><strong>金町湾：</strong>步行10min</p>
+                        <p><strong>二马路夜市：</strong>步行</p>
+                        <p><strong>海上公路：</strong>打车40min</p>
+                        <p><strong>汕尾博物馆：</strong>打车30min</p>
+                        <p><strong>小岛渔业村：</strong>打车25min</p>
+                        <p><strong>浮日湾：</strong>距离很远</p>
+                        <p><strong>风车岛：</strong>自驾最佳，距离很远</p>
+                        <p><strong>红海湾：</strong>出租车可达，距离特别远</p>
+                        <p><strong>海上公路：</strong>公交/打车</p>
+                    </div>
+                    <button class="book-btn" data-type="island">查看路线</button>
+                </div>
+            </div>
+            
+            <div class="real-time-traffic">
+                <h3><i class="fas fa-traffic-light"></i> 实时路况</h3>
+                <div class="traffic-info">
+                    <div class="traffic-status" id="trafficStatus">
+                        <i class="fas fa-check-circle"></i>
+                        <span>当前路况畅通</span>
+                    </div>
+                    <div class="travel-time">
+                        <i class="fas fa-clock"></i>
+                        <span>预计出行时间：<strong id="travelTime">1.5小时</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 图片查看模态框 -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- 轮播图将通过JavaScript动态生成 -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="image-info">
+                <h3 id="modalTitle">景点名称</h3>
+                <p id="modalDescription">景点描述</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 天气详情模态框 -->
+    <div class="modal" id="weatherModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-cloud-sun"></i> 详细天气预报</h3>
+            <div class="weather-forecast">
+                <!-- 天气预报将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-umbrella-beach"></i> 汕尾旅游指南</h3>
+                <p>探索粤东最美的海港城市，发现汕尾的独特魅力</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#map-section">路线地图</a></li>
+                    <li><a href="#attractions">景点推荐</a></li>
+                    <li><a href="#itinerary">行程规划</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>实用信息</h4>
+                <ul>
+                    <li><a href="#food">美食推荐</a></li>
+                    <li><a href="#transport">交通指南</a></li>
+                    <li><a href="#" id="contactBtn">联系我们</a></li>
+                    <li><a href="#" id="feedbackBtn">意见反馈</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>天气信息</h4>
+                <div class="footer-weather">
+                    <i class="fas fa-sun" id="footerWeatherIcon"></i>
+                    <div>
+                        <span id="footerTemp">24°C</span>
+                        <span id="footerWeather">晴天</span>
+                    </div>
+                </div>
+                <p>最后更新: <span id="lastUpdate">刚刚</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 汕尾旅游指南 | 本网站为刘志强自创，仅供自己参考</p>
+            <p class="edgeone-badge">
+                <i class="fas fa-cloud"></i> 已适配EdgeOne Pages部署
+            </p>
+        </div>
+    </footer>
+
+    <!-- 脚本引入 -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
