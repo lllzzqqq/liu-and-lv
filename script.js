@@ -53,7 +53,7 @@ function initData() {
         category: "outdoor",
         location: { lat: 22.8105, lng: 115.4032 },
         images: [
-            "https://image.baidu.com/search/detail?adpicid=0&b_applid=11783095040287354031&bdtype=0&commodity=&copyright=&cs=2780296150%2C3238121060&di=7609719975837696001&fr=click-pic&fromurl=https%253A%252F%252Fquanmin.baidu.com%252Fsv%253Fsource%253Dshare-h5%2526pd%253Dqm_share_search%2526vid%253D4436350164127362392&gsm=1e&hd=&height=0&hot=&ic=&ie=utf-8&imgformat=&imgratio=&imgspn=0&is=0%2C0&isImgSet=&latest=&lid=&lm=&objurl=https%253A%252F%252Fpic.rmb.bdstatic.com%252Fbjh%252Fdown%252FhO0sY8WK0iu0kDgOIxUwMg2d14cfa423dae4c7b9cb5e734fc3bb8d.jpg%253Ffor%253Dbg&os=2483536016%2C2128163499&pd=image_content&pi=0&pn=0&rn=1&simid=3942896313%2C471521849&tn=baiduimagedetail&width=0&word=%E9%87%91%E7%94%BA%E6%B9%BE%E6%B2%99%E6%BB%A9&z=",
+            "https://github.com/lllzzqqq/liu-and-lv/blob/main/1.jpg",
            
         tips: "做好防晒，带好墨镜、帽子、防晒霜、拖鞋、雨伞等；沙滩免费开放，停车方便"
     },
