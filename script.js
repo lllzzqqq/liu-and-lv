@@ -54,7 +54,7 @@ function initData() {
         location: { lat: 22.8105, lng: 115.4032 },
         images: [
             "https://github.com/lllzzqqq/liu-and-lv/blob/main/1.jpg",
-           
+          ], 
         tips: "做好防晒，带好墨镜、帽子、防晒霜、拖鞋、雨伞等；沙滩免费开放，停车方便"
     },
     {
