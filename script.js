@@ -252,7 +252,8 @@ function initData() {
         stars: 5,
         price: "¥8-12",
         images: [
-            "https://qcloud.dpfile.com/pc/-rU95UhwbKNaMHHmEsEHa78-E-MaAW8bTjn0Sfx8_o517POIaMMhM190jtiwP-sPNZvK3RMEnSZusP-oHmeixOpEuctC7NDQ04iV_zcg7BUYPeq-iX-oD-RLc_uA0GHhp6cjSpPcu-UE8TQHZIi94A.jpg" ],
+            "https://qcloud.dpfile.com/pc/-rU95UhwbKNaMHHmEsEHa78-E-MaAW8bTjn0Sfx8_o517POIaMMhM190jtiwP-sPNZvK3RMEnSZusP-oHmeixOpEuctC7NDQ04iV_zcg7BUYPeq-iX-oD-RLc_uA0GHhp6cjSpPcu-UE8TQHZIi94A.jpg" 
+       ],
         tags: ["肠粉", "二马路", "老字号"],
         location: "二马路",
         bestTime: "早餐、夜宵",
