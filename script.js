@@ -1607,8 +1607,16 @@ function filterFood(category) {
 // 渲染行程
 function renderItinerary() {
     // Day 1
+    const day0Timeline = document.querySelector('#day0-content .timeline');
+    day0Timeline.innerHTML = '';
+    
+    itineraryData.day0.forEach((item, index) => {
+        const timelineItem = createTimelineItem(item, index, 0);
+        day0Timeline.appendChild(timelineItem);
+    });
+    // Day 1
     const day1Timeline = document.querySelector('#day1-content .timeline');
-    day1Timeline.innerHTML = '';
+    day0Timeline.innerHTML = '';
     
     itineraryData.day1.forEach((item, index) => {
         const timelineItem = createTimelineItem(item, index, 1);
