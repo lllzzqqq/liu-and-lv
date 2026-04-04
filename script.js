@@ -1882,6 +1882,138 @@ function showItineraryPreview(itinerary) {
     modal.style.display = 'flex';
 }
 
+// 在您的script.js文件末尾添加以下代码
+document.addEventListener('DOMContentLoaded', function() {
+    // 渲染行程
+    renderItinerary();
+    
+    // 初始化日期选择器
+    initDateSelector();
+});
+
+// 渲染行程函数
+function renderItinerary() {
+    // Day 0
+    renderDayTimeline(0, document.querySelector('#day0-timeline'));
+    
+    // Day 1
+    renderDayTimeline(1, document.querySelector('#day1-timeline'));
+    
+    // Day 2
+    renderDayTimeline(2, document.querySelector('#day2-timeline'));
+}
+
+// 渲染单天行程
+function renderDayTimeline(day, container) {
+    if (!container || !itineraryData[`day${day}`]) return;
+    
+    container.innerHTML = '';
+    
+    const dayData = itineraryData[`day${day}`];
+    
+    dayData.forEach((item, index) => {
+        const timelineItem = createTimelineItem(item, index, day);
+        container.appendChild(timelineItem);
+    });
+}
+
+// 创建时间线项目
+function createTimelineItem(item, index, day) {
+    const div = document.createElement('div');
+    div.className = 'timeline-item';
+    
+    // 获取图标
+    const icon = getActivityIcon(item.type);
+    
+    // 构建时间线项目HTML
+    let html = `
+        <div class="timeline-time">
+            <i class="fas fa-clock"></i> ${item.time}
+            <span class="timeline-duration">${item.duration}小时</span>
+        </div>
+        <h4 class="timeline-title">
+            <i class="fas fa-${icon}"></i>
+            ${item.title}
+        </h4>
+        <p class="timeline-desc">${item.description}</p>
+    `;
+    
+    // 添加详细信息
+    if (item.location || item.foodRecommendation || item.tips) {
+        html += '<div class="timeline-details">';
+        
+        if (item.location) {
+            html += `
+                <div class="timeline-detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>地点：<span class="timeline-location">${item.location}</span></span>
+                </div>
+            `;
+        }
+        
+        if (item.foodRecommendation) {
+            html += `
+                <div class="timeline-detail-item">
+                    <i class="fas fa-utensils"></i>
+                    <span>美食推荐：<span class="timeline-food">${item.foodRecommendation}</span></span>
+                </div>
+            `;
+        }
+        
+        if (item.tips) {
+            html += `
+                <div class="timeline-detail-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span class="timeline-tips">${item.tips}</span>
+                </div>
+            `;
+        }
+        
+        html += '</div>';
+    }
+    
+    div.innerHTML = html;
+    return div;
+}
+
+// 获取活动图标
+function getActivityIcon(type) {
+    const icons = {
+        transport: 'train',
+        checkin: 'hotel',
+        attraction: 'camera',
+        food: 'utensils',
+        free: 'walking',
+        rest: 'bed',
+        shopping: 'shopping-bag'
+    };
+    return icons[type] || 'map-marker-alt';
+}
+
+// 初始化日期选择器
+function initDateSelector() {
+    const dateCards = document.querySelectorAll('.date-card');
+    const dayContents = document.querySelectorAll('.day-content');
+    
+    dateCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const day = this.getAttribute('data-day');
+            
+            // 更新卡片状态
+            dateCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 显示对应天的内容
+            dayContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 显示对应的day内容
+            document.getElementById(`day${day}-content`).classList.add('active');
+        });
+    });
+}
+
 // 保存自定义行程
 function saveCustomItinerary() {
     // 这里可以添加保存逻辑
