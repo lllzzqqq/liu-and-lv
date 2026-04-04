@@ -319,7 +319,7 @@ function initData() {
         stars: 5,
         price: "¥10-20",
         images: [
-            "https://ww2.sinaimg.cn/mw690/6f372a90gy1i3mzvyqc0xj22dc35su0z.jpg"
+            "https://gips1.baidu.com/it/u=556894983,3545387953&fm=3074&app=3074&f=JPEG?w=1380&h=1001&type=normal&func=CT"
         ],
         tags: ["菜粿", "传统小吃", "老字号"],
         location: "二马路",
