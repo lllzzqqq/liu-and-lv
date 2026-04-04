@@ -54,12 +54,7 @@ function initData() {
         location: { lat: 22.8105, lng: 115.4032 },
         images: [
             "https://image.baidu.com/search/detail?adpicid=0&b_applid=11783095040287354031&bdtype=0&commodity=&copyright=&cs=2780296150%2C3238121060&di=7609719975837696001&fr=click-pic&fromurl=https%253A%252F%252Fquanmin.baidu.com%252Fsv%253Fsource%253Dshare-h5%2526pd%253Dqm_share_search%2526vid%253D4436350164127362392&gsm=1e&hd=&height=0&hot=&ic=&ie=utf-8&imgformat=&imgratio=&imgspn=0&is=0%2C0&isImgSet=&latest=&lid=&lm=&objurl=https%253A%252F%252Fpic.rmb.bdstatic.com%252Fbjh%252Fdown%252FhO0sY8WK0iu0kDgOIxUwMg2d14cfa423dae4c7b9cb5e734fc3bb8d.jpg%253Ffor%253Dbg&os=2483536016%2C2128163499&pd=image_content&pi=0&pn=0&rn=1&simid=3942896313%2C471521849&tn=baiduimagedetail&width=0&word=%E9%87%91%E7%94%BA%E6%B9%BE%E6%B2%99%E6%BB%A9&z=",
-            "https://image.baidu.com/search/detail?adpicid=0&b_applid=11783095040287354031&bdtype=0&commodity=&copyright=&cs=514181248%2C2567505609&di=7609719975837696001&fr=click-pic&fromurl=http%253A%252F%252Fmbd.baidu.com%252Fnewspage%252Fdata%252Fdtlandingsuper%253Fnid%253Ddt_5403848481826221216&gsm=1e&hd=&height=0&hot=&ic=&ie=utf-8&imgformat=&imgratio=&imgspn=0&is=4239234815%2C1974882880&isImgSet=&latest=&lid=&lm=&objurl=https%253A%252F%252Fgips0.baidu.com%252Fit%252Fu%253D514181248%252C2567505609%2526fm%253D3074%2526app%253D3074%2526f%253DJPEG&os=4239234815%2C1974882880&pd=image_content&pi=0&pn=2&rn=1&simid=514181248%2C2567505609&tn=baiduimagedetail&width=0&word=%E9%87%91%E7%94%BA%E6%B9%BE%E6%B2%99%E6%BB%A9&z=",
-            "https://image.baidu.com/search/detail?adpicid=0&b_applid=11783095040287354031&bdtype=0&commodity=&copyright=&cs=1009727308%2C2407453405&di=7620110360720179201&fr=click-pic&fromurl=http%253A%252F%252Fwww.sohu.com%252Fa%252F795133573_100116740&gsm=1e&hd=&height=0&hot=&ic=&ie=utf-8&imgformat=&imgratio=&imgspn=0&is=0%2C0&isImgSet=&latest=&lid=&lm=&objurl=https%253A%252F%252Fq0.itc.cn%252Fq_70%252Fimages03%252F20240722%252F49beeca7cc054d2cad4fdf7fb31c8949.jpeg&os=1289611769%2C175509984&pd=image_content&pi=0&pn=8&rn=1&simid=1009727308%2C2407453405&tn=baiduimagedetail&width=0&word=%E9%87%91%E7%94%BA%E6%B9%BE%E6%B2%99%E6%BB%A9&z="
-        ],
-        rating: 4.8,
-        timeRequired: 3,
-        bestTime: "清晨5:30-6:30看日出，傍晚17:00-18:30看日落",
+           
         tips: "做好防晒，带好墨镜、帽子、防晒霜、拖鞋、雨伞等；沙滩免费开放，停车方便"
     },
     {
