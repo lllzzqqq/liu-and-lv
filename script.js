@@ -53,8 +53,11 @@ function initData() {
         category: "outdoor",
         location: { lat: 22.8105, lng: 115.4032 },
         images: [
-            "https://github.com/lllzzqqq/liu-and-lv/blob/main/1.jpg",
+            "https://pic.rmb.bdstatic.com/bjh/down/hO0sY8WK0iu0kDgOIxUwMg2d14cfa423dae4c7b9cb5e734fc3bb8d.jpg?for=bg",
           ], 
+        rating: 4.9,
+        timeRequired: 1.5,
+        bestTime: "上午10点前或下午4点后光线柔和，傍晚日落时分",
         tips: "做好防晒，带好墨镜、帽子、防晒霜、拖鞋、雨伞等；沙滩免费开放，停车方便"
     },
     {
