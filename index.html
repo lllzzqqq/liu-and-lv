@@ -152,7 +152,7 @@
             </div>
         </section>
 
-        <!-- 行程规划区 -->
+        <!-- <!-- 行程规划区 -->
         <section id="itinerary" class="section itinerary-section">
             <div class="section-header">
                 <h2><i class="fas fa-route"></i> 智能行程规划</h2>
@@ -231,6 +231,108 @@
                     <div class="download-options">
                         <button class="download-btn" id="downloadPDF">
                             <i class="fas fa-file-pdf"></i> 下载PDF
+                        </button>
+                        <button class="download-btn" id="shareItinerary">
+                            <i class="fas fa-share"></i> 分享行程
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <!-- 行程规划区 -->
+        <section id="itinerary" class="section itinerary-section">
+            <div class="section-header">
+                <h2><i class="fas fa-route"></i> 3天2夜行程规划</h2>
+                <p class="section-subtitle">4月4-6日汕尾详细行程安排</p>
+            </div>
+            
+            <!-- 添加日期选择器 -->
+            <div class="date-selector">
+                <div class="date-card" data-day="0">
+                    <div class="date-header">4月4日</div>
+                    <div class="date-title">Day 0 · 抵达日</div>
+                    <div class="date-subtitle">晚上抵达，轻松入住</div>
+                </div>
+                <div class="date-card active" data-day="1">
+                    <div class="date-header">4月5日</div>
+                    <div class="date-title">Day 1 · 金町湾</div>
+                    <div class="date-subtitle">沙滩、礼堂、美食街</div>
+                </div>
+                <div class="date-card" data-day="2">
+                    <div class="date-header">4月6日</div>
+                    <div class="date-title">Day 2 · 红海湾</div>
+                    <div class="date-subtitle">古堡、风车岛、日落</div>
+                </div>
+            </div>
+            
+            <div class="itinerary-container">
+                <div class="day-planner">
+                    <!-- Day 0 行程 -->
+                    <div class="day-content" id="day0-content">
+                        <div class="day-header">
+                            <h3><i class="fas fa-calendar-day"></i> Day 0: 4月4日 抵达日</h3>
+                            <p class="day-subtitle">晚上抵达，轻松入住金町湾</p>
+                        </div>
+                        <div class="timeline" id="day0-timeline">
+                            <!-- 时间线项目将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- Day 1 行程 -->
+                    <div class="day-content active" id="day1-content">
+                        <div class="day-header">
+                            <h3><i class="fas fa-calendar-day"></i> Day 1: 4月5日 金町湾片区</h3>
+                            <p class="day-subtitle">沙滩漫步、文艺打卡、美食探索</p>
+                        </div>
+                        <div class="timeline" id="day1-timeline">
+                            <!-- 时间线项目将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- Day 2 行程 -->
+                    <div class="day-content" id="day2-content">
+                        <div class="day-header">
+                            <h3><i class="fas fa-calendar-day"></i> Day 2: 4月6日 红海湾片区</h3>
+                            <p class="day-subtitle">古堡探险、风车岛、日落返程</p>
+                        </div>
+                        <div class="timeline" id="day2-timeline">
+                            <!-- 时间线项目将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="itinerary-summary">
+                    <h3><i class="fas fa-chart-line"></i> 行程概览</h3>
+                    <div class="summary-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-landmark"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalAttractions">8</span>
+                                <span class="stat-label">个景点</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalTime">20</span>
+                                <span class="stat-label">小时游玩</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-utensils"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalMeals">7</span>
+                                <span class="stat-label">次美食体验</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-advice">
+                        <h4><i class="fas fa-cloud-sun"></i> 天气建议</h4>
+                        <p id="weatherAdvice">4月汕尾天气温暖，平均气温20-25℃，建议做好防晒措施，享受户外活动。</p>
+                    </div>
+                    <div class="download-options">
+                        <button class="download-btn" id="downloadPDF">
+                            <i class="fas fa-file-pdf"></i> 下载行程PDF
                         </button>
                         <button class="download-btn" id="shareItinerary">
                             <i class="fas fa-share"></i> 分享行程
